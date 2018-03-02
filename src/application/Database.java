@@ -97,4 +97,8 @@ public class Database {
 		}
 		return 0;
 	}
+	
+	public User getUser(int index) {
+		return userDatabase.get(index);
+	}
 }
