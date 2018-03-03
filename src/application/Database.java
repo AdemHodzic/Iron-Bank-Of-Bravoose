@@ -55,19 +55,22 @@ public class Database {
 		return userDatabase.get(getUserIndex(userID)).toString();
 	}
 	
-	public void transfer(String source, String target, double amount) {
+	public void transfer(int source, String target, double amount) throws Exception {
 		userDatabase.get(getUserIndex(source))
 		.transfer(userDatabase.get(
 				getUserIndex(target)), amount);
+		writeUsers();
 	}
 	
-	public void withdraw(String user, double amount) {
+	public void withdraw(int pin, double amount) throws Exception {
 		userDatabase
-		.get(getUserIndex(user))
+		.get(getUserIndex(pin))
 		.withdraw(amount);
+		writeUsers();
 	}
 	
-	public boolean isValid(String username, int pin){
+	public boolean isValid(String username, int pin) throws Exception{
+		readUsers();
 		if(pin<0) return false;
 		for(User user:userDatabase) {
 			if(user.getUserID().equals(username) || user.getUserPIN()==pin) return true;
@@ -76,10 +79,11 @@ public class Database {
 		return false;
 	}
 	
-	public void deposit(String user, double amount) {
+	public void deposit(int pin, double amount) throws Exception {
 		userDatabase
-		.get(getUserIndex(user))
+		.get(getUserIndex(pin))
 		.deposit(amount);
+		writeUsers();
 	}
 	
 	private boolean validate(int num) {
@@ -89,6 +93,13 @@ public class Database {
 		}
 		
 		return true;
+	}
+	
+	private int getUserIndex(int num) {
+		for(int i = 0;i<userDatabase.size();i++) {
+			if(userDatabase.get(i).getUserPIN()==num) return i;
+		}
+		return 0;
 	}
 	
 	private int getUserIndex(String str) {
@@ -101,4 +112,10 @@ public class Database {
 	public User getUser(int index) {
 		return userDatabase.get(index);
 	}
+
+	public ArrayList<User> getUserDatabase() {
+		return userDatabase;
+	}
+	
+	
 }
