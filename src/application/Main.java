@@ -1,20 +1,25 @@
 package application;
 	
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 
 public class Main extends Application {
 	private Stage window;
-	private Controller controller = new Controller();
 	private ViewHandler viewController = new ViewHandler();
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			window = primaryStage;
-			viewController.getErrorWindow("test","test");
-			window.setScene(viewController.getUserScene(controller.getUser(0)));
+			AnimationTimer timer = new AnimationTimer() {
+				@Override
+				public void handle(long now) {
+					window.setScene(viewController.getLoginScene());
+				}
+			};
+			timer.start();
 			window.show();
 		} catch(Exception e) {
 			e.printStackTrace();

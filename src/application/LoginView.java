@@ -10,17 +10,17 @@ import javafx.scene.*;
 
 public class LoginView implements View{
 	private Scene scene;
-	private Controller controller;
-	
+	private Controller controller = new Controller();
+	private UserView userView;
 	private final int  WIDTH = 640;
 	private final int HEIGHT = WIDTH/12 * 9;
-	
+	private VBox layout;
 	
 	LoginView(){
 		
 	}
 	
-	public Scene getScene() {
+	private void makeScene() {
 		//UserID
 		Label userIDLabel = new Label("UserID: ");
 		TextField userIDInput = new TextField();
@@ -51,20 +51,35 @@ public class LoginView implements View{
 		});
 		
 		loginButton.setOnAction(e->{
-			if(controller.login(userIDInput.getText(), Integer.parseInt(userPINInput.getText()))) {
-					System.out.println("Login succesful");
+			try {
+				if(controller.login(userIDInput.getText(),Integer.parseInt(userPINInput.getText()))) {
+					User user = controller.getUser(
+							controller.getUserIndex(Integer.parseInt(userPINInput.getText())));
+					userView = new UserView(user);
+					scene = userView.getScene();
 				}else {
-					System.out.println("Error");
+					System.out.println("Fuck you too");
 				}
+			}catch(Exception ex) {
+				ex.printStackTrace();
 			}
+		}
+			
 		);
 		btnHBox.getChildren().addAll(loginButton,registerButton);
 		
 		//VBOX and scene setup
-		VBox vbox = new VBox();
-		vbox.getChildren().addAll(userIDHBox,userPINHBox,btnHBox);
-		vbox.setAlignment(Pos.CENTER_LEFT);
-		scene = new Scene(vbox,WIDTH, HEIGHT);
+		layout = new VBox();
+		layout.getChildren().addAll(userIDHBox,userPINHBox,btnHBox);
+		layout.setAlignment(Pos.CENTER_LEFT);
+		
+	}
+	
+	public Scene getScene() {
+		makeScene();
+		if(scene==null) {
+			scene = new Scene(layout,WIDTH,HEIGHT);
+		}
 		return scene;
 	}
 }
