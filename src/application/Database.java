@@ -48,6 +48,8 @@ public class Database {
 		}else {
 			//Add pop up window for invalid user
 			System.out.println("Cannot create user");
+			ErrorView err = new ErrorView();
+			err.display("Wrong input", "USER WITH THAT PIN ALREADY EXISTS");
 		}
 	}
 	

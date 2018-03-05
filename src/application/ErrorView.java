@@ -33,6 +33,6 @@ public class ErrorView implements View{
 		vbox.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(vbox,400,250);
 		window.setScene(scene);
-		window.showAndWait();
+		window.show();
 	}
 }
