@@ -13,6 +13,7 @@ public class UserView implements View{
 	private final int HEIGHT = WIDTH/12 * 9;
 	private User user;
 	private Controller controller = new Controller();
+	WindowHandler windowHandler = new WindowHandler();
 	UserView(User user){
 		this.user = user;
 	}
@@ -22,29 +23,21 @@ public class UserView implements View{
 		Button withdrawButton = new Button("Withdraw");
 		
 		depositButton.setOnAction(e->{
-			Scanner input = new Scanner(System.in);
-			System.out.println("How many funds to deposit: ");
-			double amount = input.nextDouble();
-			try {
-				controller.deposit(user.getUserPIN(), amount);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			input.close();
+			windowHandler.deposit(this.user);
 		});
 		
 		withdrawButton.setOnAction(e->{
-			Scanner input = new Scanner(System.in);
-			System.out.println("How many funds to withdraw: ");
-			double amount = input.nextDouble();
-			try {
-				controller.withdraw(user.getUserPIN(), amount);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			input.close();
+//			Scanner input = new Scanner(System.in);
+//			System.out.println("How many funds to withdraw: ");
+//			double amount = input.nextDouble();
+//			try {
+//				controller.withdraw(user.getUserPIN(), amount);
+//			} catch (Exception e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//			input.close();
+			windowHandler.withdraw(this.user);
 		});
 		
 		HBox firstRow = new HBox();

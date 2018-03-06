@@ -54,6 +54,12 @@ public class Database {
 	}
 	
 	public String info(String userID) {
+		try {
+			readUsers();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return userDatabase.get(getUserIndex(userID)).toString();
 	}
 	
