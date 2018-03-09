@@ -9,8 +9,9 @@ public class WindowHandler {
 		window.display();
 	}
 	
-	public void transfer() {
-		
+	public void transfer(User user) {
+		TransferWindow window = new TransferWindow(user);
+		window.display();
 	}
 	
 	public void withdraw(User user) {
@@ -18,7 +19,8 @@ public class WindowHandler {
 		window.display();
 	}
 	
-	public void infor() {
-		
+	public void info(User user) {
+		InfoWindow window = new InfoWindow(user);
+		window.display();
 	}
 }

@@ -53,4 +53,16 @@ public class Controller {
 		}
 		return -1;
 	}
+	
+
+	public int getUserIndex(String str) {
+		for(int i = 0;i<db.getUserDatabase().size();i++) {
+			if(db.getUserDatabase().get(i).getUserID().equals(str)) return i;
+		}
+		return -1;
+	}
+	
+	public Database getDatabase() {
+		return db;
+	}
 }
