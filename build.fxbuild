@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
-<anttasks:AntTask xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:anttasks="http://org.eclipse.fx.ide.jdt/1.0" buildDirectory="${project}/build">
+<anttasks:AntTask xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:anttasks="http://org.eclipse.fx.ide.jdt/1.0" buildDirectory="${project}/build" cssToBin="true">
   <deploy>
-    <application name="IronBank"/>
-    <info/>
+    <application name="IronBank" mainclass="application.Main" version="0.0.1 RELEASE" toolkit="fx"/>
+    <info title="Iron Bank" vendor="Adem Hodzic"/>
   </deploy>
   <signjar/>
 </anttasks:AntTask>

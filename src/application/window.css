@@ -1,7 +1,7 @@
 .root{
 	-fx-background-color: #999999;
 	-fx-font-weight: bold;
-	-fx-font-size: 36px;
+	-fx-font-size: 24px;
 }
 
 Button{
