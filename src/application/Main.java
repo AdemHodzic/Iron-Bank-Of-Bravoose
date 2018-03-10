@@ -19,6 +19,7 @@ public class Main extends Application {
 					window.setScene(viewController.getLoginScene());
 				}
 			};
+			window.setTitle("Iron Bank Of Bravoose");
 			timer.start();
 			window.show();
 		} catch(Exception e) {

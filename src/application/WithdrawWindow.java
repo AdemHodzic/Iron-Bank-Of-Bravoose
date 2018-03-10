@@ -39,6 +39,8 @@ public class WithdrawWindow extends Window{
 		layout.getChildren().addAll(inputLayout, btn);
 		
 		Scene scene = new Scene(layout, 480,320);
+		scene.getStylesheets().add(getClass().getResource("window.css").toExternalForm());
+		
 		window.setScene(scene);
 		window.show();
 	}

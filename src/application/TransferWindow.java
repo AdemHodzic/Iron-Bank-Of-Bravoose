@@ -36,6 +36,7 @@ public class TransferWindow extends Window{
 		VBox layout = new VBox();
 		layout.getChildren().addAll(transferLayout,amountLayout,btn);
 		Scene scene = new Scene(layout,480,360);
+		scene.getStylesheets().add(getClass().getResource("window.css").toExternalForm());
 		window.setScene(scene);
 		window.setTitle("TRANSFER");
 		window.show();

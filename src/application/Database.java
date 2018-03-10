@@ -63,6 +63,16 @@ public class Database {
 		return userDatabase.get(getUserIndex(userID)).toString();
 	}
 	
+	public String info(int pin) {
+		try {
+			readUsers();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return userDatabase.get(getUserIndex(pin)).toString();
+	}
+	
 	public void transfer(int source, String target, double amount) throws Exception {
 		userDatabase.get(getUserIndex(source))
 		.transfer(userDatabase.get(
@@ -81,7 +91,7 @@ public class Database {
 		readUsers();
 		if(pin<0) return false;
 		for(User user:userDatabase) {
-			if(user.getUserID().equals(username) || user.getUserPIN()==pin) return true;
+			if(user.getUserID().equals(username) && user.getUserPIN()==pin) return true;
 		}
 		
 		return false;
