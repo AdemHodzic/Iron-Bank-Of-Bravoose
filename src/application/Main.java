@@ -1,7 +1,11 @@
 package application;
 	
+import java.io.File;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 
@@ -19,6 +23,11 @@ public class Main extends Application {
 					window.setScene(viewController.getLoginScene());
 				}
 			};
+			window.setTitle("Iron Bank Of Bravoose");
+			String musicFile = "sound.mp3";     
+			Media sound = new Media(new File(musicFile).toURI().toString());
+			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+			mediaPlayer.play();
 			timer.start();
 			window.show();
 		} catch(Exception e) {

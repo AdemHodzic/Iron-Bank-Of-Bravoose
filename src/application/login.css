@@ -1,0 +1,10 @@
+.root{
+	-fx-background-color: #999999;
+}
+
+Button{
+	-fx-background-color: #777777;
+	-fx-min-width: 350%;
+	-fx-min-height: 350%;
+	
+}

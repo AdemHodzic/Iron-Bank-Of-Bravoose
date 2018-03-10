@@ -1,14 +1,13 @@
 package application;
 
-
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 public class LoginView implements View{
 	
 	private Scene scene;
@@ -17,8 +16,8 @@ public class LoginView implements View{
 	
 	private final int  WIDTH = 640;
 	private final int HEIGHT = WIDTH/12 * 9;
-	private VBox layout;
 	private Button loginButton;
+	private GridPane grid;
 	
 	LoginView(){
 		
@@ -27,21 +26,21 @@ public class LoginView implements View{
 	private void makeScene() {
 		//UserID
 		Label userIDLabel = new Label("UserID: ");
+		GridPane.setConstraints(userIDLabel, 0, 0);
 		TextField userIDInput = new TextField();
-		HBox userIDHBox = new HBox();
-		userIDHBox.getChildren().addAll(userIDLabel, userIDInput);
-		
+		GridPane.setConstraints(userIDInput, 1, 0);
 		//User PIN
 		Label userPINLabel = new Label("UserPIN: ");
 		TextField userPINInput = new TextField();
-		HBox userPINHBox = new HBox();
-		userPINHBox.getChildren().addAll(userPINLabel, userPINInput);
+		GridPane.setConstraints(userPINLabel, 0, 1);
+		GridPane.setConstraints(userPINInput, 1, 1);
 		
 		//Login button and register button
 		loginButton = new Button("Login");
 		Button registerButton = new Button("Register");
-		HBox btnHBox = new HBox();
-
+		GridPane.setConstraints(loginButton, 0, 2);
+		GridPane.setConstraints(registerButton, 1, 2);
+		
 		registerButton.setOnAction(e->{
 				try {
 					if(controller.isNumber(userPINInput.getText()) && !userIDInput.getText().equals("")) {
@@ -73,7 +72,7 @@ public class LoginView implements View{
 					scene = userView.getScene();
 				}else {
 					ErrorView err = new ErrorView();
-					err.display(("YOU HAVE ENTERED WRONG INFORMATION\nPLEASE TRY AGAIN\n" + (userPINInput.getText().length())),"WRONG INFORMATION");
+					err.display("YOU HAVE ENTERED WRONG INFORMATION\nPLEASE TRY AGAIN\n","WRONG INFORMATION");
 				}
 			}catch(NumberFormatException en) {
 				ErrorView err = new ErrorView();
@@ -84,19 +83,19 @@ public class LoginView implements View{
 		}
 			
 		);
-		btnHBox.getChildren().addAll(loginButton,registerButton);
 		
-		//VBOX and scene setup
-		layout = new VBox();
-		layout.getChildren().addAll(userIDHBox,userPINHBox,btnHBox);
-		layout.setAlignment(Pos.CENTER_LEFT);
-		
+		grid = new GridPane();
+		grid.setPadding(new Insets(10,10,10,10));
+		grid.setVgap(10);
+		grid.setHgap(12);
+		grid.getChildren().addAll(userIDLabel,userIDInput,userPINLabel,userPINInput,loginButton,registerButton);
+		grid.setAlignment(Pos.CENTER);
 	}
 	
 	public Scene getScene() {
 		makeScene();
 		if(scene==null) {
-			scene = new Scene(layout,WIDTH,HEIGHT);
+			scene = new Scene(grid,WIDTH,HEIGHT);
 			scene.setOnKeyPressed(e->{
 				if(e.getCode().equals(KeyCode.ENTER)) {
 					loginButton.fire();
@@ -104,6 +103,7 @@ public class LoginView implements View{
 				}
 			});
 		}
+		scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
 		return scene;
 	}
 }

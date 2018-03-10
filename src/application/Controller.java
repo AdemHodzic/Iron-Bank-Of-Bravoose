@@ -24,6 +24,12 @@ public class Controller {
 		return db.info(name);
 	}
 	
+	public String getInfo(int pin) {
+		return db.info(pin);
+	}
+	
+	
+	
 	public void deposit(int pin, double amount) throws Exception {
 		db.deposit(pin, amount);
 	}

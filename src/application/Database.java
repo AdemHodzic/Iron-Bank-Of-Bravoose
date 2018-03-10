@@ -19,14 +19,11 @@ public class Database {
 		userDatabase.clear();
 		BufferedReader reader = Files.newBufferedReader(path);
 		String temp;
-		System.out.println("Loading");
 		while((temp=reader.readLine())!=null) {
 			String[] arr = temp.split(" ");
 			User user = new User(arr[0], Integer.parseInt(arr[1]), Double.parseDouble(arr[2]));
 			userDatabase.add(user);
 		}
-		System.out.println(userDatabase);
-		System.out.println("Ended");
 		reader.close();
 	}
 	
@@ -47,7 +44,6 @@ public class Database {
 			writeUsers();
 		}else {
 			//Add pop up window for invalid user
-			System.out.println("Cannot create user");
 			ErrorView err = new ErrorView();
 			err.display("Wrong input", "USER WITH THAT PIN ALREADY EXISTS");
 		}
@@ -61,6 +57,16 @@ public class Database {
 			e.printStackTrace();
 		}
 		return userDatabase.get(getUserIndex(userID)).toString();
+	}
+	
+	public String info(int pin) {
+		try {
+			readUsers();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return userDatabase.get(getUserIndex(pin)).toString();
 	}
 	
 	public void transfer(int source, String target, double amount) throws Exception {
@@ -81,7 +87,7 @@ public class Database {
 		readUsers();
 		if(pin<0) return false;
 		for(User user:userDatabase) {
-			if(user.getUserID().equals(username) || user.getUserPIN()==pin) return true;
+			if(user.getUserID().equals(username) && user.getUserPIN()==pin) return true;
 		}
 		
 		return false;
